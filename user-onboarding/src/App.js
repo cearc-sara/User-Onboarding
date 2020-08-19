@@ -51,7 +51,11 @@ const getUsers = () => {
 const postNewUser = newUser => {
   axios.post('https://reqres.in/api/users', newUser)
   .then(res => {
-    setUsers(users.concat(res.data.data))
+    setUsers(users.concat(res.data))
+    // setUsers([
+    //   ...users, 
+    // ])
+    console.log(res)
   })
   .catch(err => {
     debugger
@@ -86,6 +90,7 @@ const submit = () => {
     password: formValues.password.trim(),
     role: formValues.role,
     terms: Object.keys(formValues.terms),
+    id: Math.floor(Math.random() * 100000),
   }
   postNewUser(newUser)
 }
@@ -102,7 +107,9 @@ useEffect(() => {
   })
 },[formValues])
 
-
+useEffect(() => {
+console.log(users)
+},[users])
   return (
     <div className="App">
       <header className="App-header"><h1>User App</h1></header>
@@ -116,10 +123,14 @@ useEffect(() => {
       />
 
       {
-        users.map(user => {
+        users.map((user) => {
+          // console.log(user)
           return (
+           
             <User key={user.id} details={user} />
+            
           )
+           
         })
       }
     </div>
