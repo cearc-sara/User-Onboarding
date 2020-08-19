@@ -37,6 +37,60 @@ export default function Form(props) {
                     <div>{errors.password}</div>
                 </div>
             </div>
+
+            <div className='form-group inputs'>
+                <h4>General Information</h4>
+
+                <label>First Name&nbsp;
+                    <input
+                    value={values.first_name}
+                    onChange={onInputChange}
+                    name='first_name'
+                    type='text'
+                    />
+                </label>
+
+                <label>Last Name&nbsp;
+                    <input
+                    value={values.last_name}
+                    onChange={onInputChange}
+                    name='last_name'
+                    type='text'
+                    />
+                </label>
+
+                <label>Email
+                    <input
+                    value={values.email}
+                    onChange={onInputChange}
+                    name='email'
+                    type='text'
+                    />
+                </label>
+
+                <label>Password
+                    <input
+                    value={values.password}
+                    onChange={onInputChange}
+                    name='password'
+                    type='text'
+                    />
+                </label>
+
+                <label>Role
+                    <select
+                    onChange={onInputChange}
+                    value={values.role}
+                    name='role'
+                    >
+                        <option value=''>--Select a Role--</option>
+                        <option value='student'>Student</option>
+                        <option value='alumni'>Alumni</option>
+                        <option value='instructor'>Instructor</option>
+                        <option value='tl'>Team Lead</option>
+                    </select>
+                </label>
+            </div>
         </form>
     )
 }

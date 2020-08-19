@@ -1,25 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import Form from './Form';
-import User from './User';
-import formSchema from './formSchema';
-import './App.css';
-import axios from 'axios';
-import * yup from 'yup';
+import React, {useState, useEffect} from 'react'
+
+// import './App.css';
+import axios from 'axios'
+import * as yup from 'yup'
+
+import Form from './Form'
+import User from './User'
+import formSchema from './formSchema'
 
 const initialFormValues = {
-  name: '',
+  first_name: '',
+  last_name: '',
   email: '',
   password: '',
+  role: '',
+  terms: {
+    agree: false,
+    disagree: false,
+  },
 }
 
 const initialFormErrors ={
-  name: '',
+  first_name: '',
+  last_name: '',
   email: '',
   password: '',
+  role: '',
 }
 
 const initialUsers = []
-const initalDisabled = true
+const initialDisabled = true
 
 function App() {
   const [users, setUsers] = useState(initialUsers)
@@ -30,7 +40,8 @@ function App() {
 const getUsers = () => {
   axios.get('https://reqres.in/api/users')
   .then(res => {
-    setUsers(res.data)
+    setUsers(res.data.data)
+    console.log(res.data.data)
   })
   .catch(err => {
     debugger
@@ -40,7 +51,7 @@ const getUsers = () => {
 const postNewUser = newUser => {
   axios.post('https://reqres.in/api/users', newUser)
   .then(res => {
-    setUsers(users.concat(res.data))
+    setUsers(users.concat(res.data.data))
   })
   .catch(err => {
     debugger
@@ -63,15 +74,18 @@ const inputChange = (name, value) => {
   setFormValues({...formValues, [name]: value})
 }
 
-// const checkboxChange = (name, isChecked) => {
-//   setFormValues({...formValues, })
-// }
+const checkboxChange = (name, isChecked) => {
+  setFormValues({...formValues, terms: {...formValues.terms, [name]: isChecked}})
+}
 
 const submit = () => {
   const newUser = {
-    name: formValues.name.trim(),
+    first_name: formValues.first_name.trim(),
+    last_name:formValues.last_name.trim(),
     email: formValues.email.trim(),
     password: formValues.password.trim(),
+    role: formValues.role,
+    terms: Object.keys(formValues.terms),
   }
   postNewUser(newUser)
 }
@@ -95,7 +109,7 @@ useEffect(() => {
       <Form
       values={formValues}
       inputChange={inputChange}
-      // checkboxChange={checkboxChange}
+      checkboxChange={checkboxChange}
       submit={submit}
       disabled={disabled}
       errors={formErrors}
