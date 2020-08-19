@@ -1,4 +1,28 @@
 import React from 'react';
+import styled from 'styled-components'
+
+
+const StyledForm = styled.form`
+background-color:${props => props.theme.black};
+padding:${props => props.theme.paddingSmall};
+color:${props => props.theme.primaryColor};
+border:5px solid ${props => props.theme.secondaryColor};
+border-radius:20px;
+
+label{
+    display:flex;
+    flex-direction:column;
+    margin:${props => props.theme.margins.small};
+    align-items:center;
+    
+}
+h4{
+    color:${props => props.theme.secondaryColor};
+}
+
+`
+
+
 
 export default function Form(props) {
     const {
@@ -26,7 +50,7 @@ export default function Form(props) {
     }
 
     return(
-        <form className='form container' onSubmit={onSumbit}>
+        <StyledForm className='form container' onSubmit={onSumbit}>
             <div className='form-group submit'>
                 <h2>Add a User</h2>
                 <button disabled={disabled}>Submit</button>
@@ -44,7 +68,7 @@ export default function Form(props) {
 
                 <label>First Name&nbsp;
                     <input
-                    value={values.first_name}
+                    value= {values.first_name}
                     onChange={onInputChange}
                     name='first_name'
                     type='text'
@@ -53,7 +77,7 @@ export default function Form(props) {
 
                 <label>Last Name&nbsp;
                     <input
-                    value={values.last_name}
+                    value= {values.last_name}
                     onChange={onInputChange}
                     name='last_name'
                     type='text'
@@ -62,7 +86,7 @@ export default function Form(props) {
 
                 <label>Email
                     <input
-                    value={values.email}
+                    value= {values.email}
                     onChange={onInputChange}
                     name='email'
                     type='text'
@@ -71,7 +95,7 @@ export default function Form(props) {
 
                 <label>Password
                     <input
-                    value={values.password}
+                    value= {values.password}
                     onChange={onInputChange}
                     name='password'
                     type='text'
@@ -81,7 +105,7 @@ export default function Form(props) {
                 <label>Role
                     <select
                     onChange={onInputChange}
-                    value={values.role}
+                    value= {values.role}
                     name='role'
                     >
                         <option value=''>--Select a Role--</option>
@@ -115,6 +139,6 @@ export default function Form(props) {
                     />
                 </label>
             </div>
-        </form>
+        </StyledForm>
     )
 }

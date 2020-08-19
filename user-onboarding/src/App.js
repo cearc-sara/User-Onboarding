@@ -8,6 +8,27 @@ import Form from './Form'
 import User from './User'
 import formSchema from './formSchema'
 
+import styled from 'styled-components';
+
+const StyledHeader = styled.div`
+
+background-color:${props => props.theme.tertiaryColor};
+padding:${props => props.theme.paddingSmall};
+color:${props => props.theme.primaryColor};
+
+h1{
+  color:${props => props.theme.primaryColor};
+  display:flex;
+  justify-content:center;
+}
+.App-header{
+  min-height: 30vh;
+  background-color:${props => props.theme.tertiaryColor};
+}
+
+
+`
+
 const initialFormValues = {
   first_name: '',
   last_name: '',
@@ -111,7 +132,7 @@ useEffect(() => {
 console.log(users)
 },[users])
   return (
-    <div className="App">
+    <StyledHeader className="App">
       <header className="App-header"><h1>User App</h1></header>
       <Form
       values={formValues}
@@ -133,7 +154,7 @@ console.log(users)
            
         })
       }
-    </div>
+    </StyledHeader>
   );
 }
 

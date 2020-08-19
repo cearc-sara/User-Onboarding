@@ -6,6 +6,10 @@ const StyledUser = styled.div`
 background-color:${props => props.theme.black};
 padding:${props => props.theme.paddingSmall};
 color:${props => props.theme.primaryColor};
+border:5px solid ${props => props.theme.secondaryColor};
+margin:${props => props.theme.margins.medium};
+border-radius:20px;
+
 `
 
 
@@ -17,8 +21,8 @@ function User({details}) {
     return(
         <StyledUser className='user container'>
             <h2>{details.first_name} {details.last_name}</h2>
-            <p>Email:{details.email}</p>
-            <p>Role:{details.role}</p>
+            <p>Email: {details.email}</p>
+            <p>Role: {details.role}</p>
         </StyledUser>
     )
 }
